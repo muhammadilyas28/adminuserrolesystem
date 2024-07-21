@@ -1,505 +1,448 @@
-// Create the main div element
-const mainDiv = document.createElement('div');
-mainDiv.classList.add('max-w-2xl', 'mx-auto');
-
-// Create and append h1 element
-const heading_main = document.createElement('h1');
-heading_main.classList.add('text-2xl', 'font-bold', 'mb-4');
-heading_main.innerText = 'Role and Department Management';
-mainDiv.appendChild(heading_main);
-
-// Append the main div to the body (or another container element)
-document.body.appendChild(mainDiv);
-
-
-// Add Role and Department Form
-
-// Create form element
-const form = document.createElement('form');
-form.id = 'addRoleForm';
-form.classList.add('bg-white', 'p-4', 'shadow', 'rounded', 'mb-6');
-
-// Create div for Role input
-const roleDIv1 = document.createElement('div');
-roleDIv1.classList.add('mb-4');
-
-// Create and append label for Role
-const roleLabel = document.createElement('label');
-roleLabel.classList.add('block', 'text-gray-700');
-roleLabel.innerText = 'Role:';
-roleDIv1.appendChild(roleLabel);
-
-// Create and append input for Role
-const roleInput = document.createElement('input');
-roleInput.type = 'text';
-roleInput.id = 'newRole';
-roleInput.classList.add('mt-1', 'p-2', 'w-full', 'border', 'rounded');
-roleInput.placeholder = 'Enter role name';
-roleDIv1.appendChild(roleInput);
-
-// Append Role div to form
-form.appendChild(roleDIv1);
-
-// Create div for Department input
-const departmentDiv1 = document.createElement('div');
-departmentDiv1.classList.add('mb-4');
-
-// Create and append label for Department
-const departmentLabel = document.createElement('label');
-departmentLabel.classList.add('block', 'text-gray-700');
-departmentLabel.innerText = 'Department:';
-departmentDiv1.appendChild(departmentLabel);
-
-// Create and append input for Department
-const departmentInput = document.createElement('input');
-departmentInput.type = 'text';
-departmentInput.id = 'newDepartment';
-departmentInput.classList.add('mt-1', 'p-2', 'w-full', 'border', 'rounded');
-departmentInput.placeholder = 'Enter department name';
-departmentDiv1.appendChild(departmentInput);
-
-// Append Department div to form
-form.appendChild(departmentDiv1);
-
-// Create and append button
-const button = document.createElement('button');
-button.type = 'button';
-button.onclick = function() { addRole(); };
-button.classList.add('bg-blue-500', 'text-white', 'px-4', 'py-2', 'rounded');
-button.innerText = 'Add Role and Department';
-form.appendChild(button);
-
-// Append form to body (or another container element)
-document.body.appendChild(form);
-
-// Sample addRole function
-function addRole() {
-    const role = document.getElementById('newRole').value;
-    const department = document.getElementById('newDepartment').value;
-    console.log(`Role: ${role}, Department: ${department}`);
-}
-// <!-- Register User Form -->
-
-// Create form element
-// const form1 = document.createElement('form');
-// form1.id = 'registerForm';
-// form1.classList.add('bg-white', 'p-4', 'shadow', 'rounded', 'mb-6');
-
-// Create div for Name input
-// const nameDiv = document.createElement('div');
-// nameDiv.classList.add('mb-4');
-
-// Create and append label for Name
-// const nameLabel = document.createElement('label');
-// nameLabel.classList.add('block', 'text-gray-700');
-// nameLabel.innerText = 'Name:';
-// nameDiv.appendChild(nameLabel);
-
-// Create and append input for Name
-// const nameInput = document.createElement('input');
-// nameInput.type = 'text';
-// nameInput.id = 'name';
-// nameInput.classList.add('mt-1', 'p-2', 'w-full', 'border', 'rounded');
-// nameInput.placeholder = 'Enter name';
-// nameDiv.appendChild(nameInput);
-
-// Append Name div to form
-// form1.appendChild(nameDiv);
-
-// Create div for Username input
-const usernameDiv = document.createElement('div');
-usernameDiv.classList.add('mb-4');
-
-// Create and append label for Username
-const usernameLabel = document.createElement('label');
-usernameLabel.classList.add('block', 'text-gray-700');
-usernameLabel.innerText = 'Username:';
-usernameDiv.appendChild(usernameLabel);
-
-// Create and append input for Username
-const usernameInput = document.createElement('input');
-usernameInput.type = 'text';
-usernameInput.id = 'username';
-usernameInput.classList.add('mt-1', 'p-2', 'w-full', 'border', 'rounded');
-usernameInput.placeholder = 'Enter username';
-usernameDiv.appendChild(usernameInput);
-
-// Append Username div to form
-form.appendChild(usernameDiv);
-
-// Create div for Role select
-const roleDiv = document.createElement('div');
-roleDiv.classList.add('mb-4');
-
-// Create and append label for Role
-const roleLabel1 = document.createElement('label');
-roleLabel1.classList.add('block', 'text-gray-700');
-roleLabel1.innerText = 'Select Role:';
-roleDiv.appendChild(roleLabel1);
-
-// Create and append select for Role
-const roleSelect = document.createElement('select');
-roleSelect.id = 'roleSelect';
-roleSelect.classList.add('mt-1', 'p-2', 'w-full', 'border', 'rounded');
-roleDiv.appendChild(roleSelect);
-
-// Append Role div to form
-form.appendChild(roleDiv);
-
-// Create div for Department select
-const departmentDiv = document.createElement('div');
-departmentDiv.classList.add('mb-4');
-
-// Create and append label for Department
-const departmentLabel1 = document.createElement('label');
-departmentLabel1.classList.add('block', 'text-gray-700');
-departmentLabel1.innerText = 'Select Department:';
-departmentDiv.appendChild(departmentLabel1);
-
-// Create and append select for Department
-const departmentSelect = document.createElement('select');
-departmentSelect.id = 'departmentSelect';
-departmentSelect.classList.add('mt-1', 'p-2', 'w-full', 'border', 'rounded');
-departmentDiv.appendChild(departmentSelect);
-
-// Append Department div to form
-form.appendChild(departmentDiv);
-
-// Create and append button
-const button1 = document.createElement('button');
-button1.type = 'button';
-button1.onclick = function() { registerUser(); };
-button1.classList.add('bg-green-500', 'text-white', 'px-4', 'py-2', 'rounded');
-button1.innerText = 'Register';
-form.appendChild(button1);
-
-// Append form to body (or another container element)
-// document.body.appendChild(form1);
-
-// Sample function to populate roles and departments
-function populateSelectOptions() {
-    const roles = ['Admin', 'Editor', 'Viewer'];
-    const departments = ['HR', 'IT', 'Finance'];
-
-    const roleSelect = document.getElementById('roleSelect');
-    roles.forEach(role => {
-        const option = document.createElement('option');
-        option.value = role;
-        option.innerText = role;
-        roleSelect.appendChild(option);
-    });
-
-    const departmentSelect = document.getElementById('departmentSelect');
-    departments.forEach(department => {
-        const option = document.createElement('option');
-        option.value = department;
-        option.innerText = department;
-        departmentSelect.appendChild(option);
-    });
-}
-
-// Call the function to populate select options
-populateSelectOptions();
-
-// Sample registerUser function
-function registerUser() {
-    const name = document.getElementById('name').value;
-    const username = document.getElementById('username').value;
-    const role = document.getElementById('roleSelect').value;
-    const department = document.getElementById('departmentSelect').value;
-    console.log(`Name: ${name}, Username: ${username}, Role: ${role}, Department: ${department}`);
-}
-
-// ---------------------------
-// --------- <!-- Login Form -->------------------
-// Create form element
-const form_login = document.createElement('form');
-form_login.id = 'loginForm';
-form_login.classList.add('bg-white', 'p-4', 'shadow', 'rounded', 'mb-6');
-
-// Create div for Username input
-const usernameDiv_1 = document.createElement('div');
-usernameDiv_1.classList.add('mb-4');
-
-// Create and append label for Username
-const usernameLabel_login = document.createElement('label');
-usernameLabel_login.classList.add('block', 'text-gray-700');
-usernameLabel_login.innerText = 'Username:';
-usernameDiv_1.appendChild(usernameLabel_login);
-
-// Create and append input for Username
-const usernameInput_login = document.createElement('input');
-usernameInput_login.type = 'text';
-usernameInput_login.id = 'loginUsername';
-usernameInput_login.classList.add('mt-1', 'p-2', 'w-full', 'border', 'rounded');
-usernameInput_login.placeholder = 'Enter username';
-usernameDiv_1.appendChild(usernameInput_login);
-
-// Append Username div to form
-form_login.appendChild(usernameDiv_1);
-
-// Create div for Role select
-const roleDiv_1 = document.createElement('div');
-roleDiv_1.classList.add('mb-4');
-
-// Create and append label for Role
-const roleLabel_login = document.createElement('label');
-roleLabel_login.classList.add('block', 'text-gray-700');
-roleLabel_login.innerText = 'Select Role:';
-roleDiv_1.appendChild(roleLabel_login);
-
-// Create and append select for Role
-const roleSelect_login = document.createElement('select');
-roleSelect_login.id = 'loginRoleSelect';
-roleSelect_login.classList.add('mt-1', 'p-2', 'w-full', 'border', 'rounded');
-roleDiv_1.appendChild(roleSelect_login);
-
-// Append Role div to form
-form_login.appendChild(roleDiv_1);
-
-// Create div for Department select
-const departmentDiv_1 = document.createElement('div');
-departmentDiv_1.classList.add('mb-4');
-
-// Create and append label for Department
-const departmentLabel_login = document.createElement('label');
-departmentLabel_login.classList.add('block', 'text-gray-700');
-departmentLabel_login.innerText = 'Select Department:';
-departmentDiv_1.appendChild(departmentLabel_login);
-
-// Create and append select for Department
-const departmentSelect_log_loginin = document.createElement('select');
-departmentSelect_log_loginin.id = 'loginDepartmentSelect';
-departmentSelect_log_loginin.classList.add('mt-1', 'p-2', 'w-full', 'border', 'rounded');
-departmentDiv_1.appendChild(departmentSelect_log_loginin);
-
-// Append Department div to form
-form_login.appendChild(departmentDiv_1);
-
-// Create and append login button
-const button_login = document.createElement('button');
-button_login.type = 'button';
-button_login.onclick = function() { loginUser(); };
-button_login.classList.add('bg-purple-500', 'text-white', 'px-4', 'py-2', 'rounded');
-button_login.innerText = 'Login';
-form_login.appendChild(button_login);
-
-// Append form to body (or another container element)
-document.body.appendChild(form_login);
-
-// Sample loginUser function
-function loginUser() {
-    const username = document.getElementById('loginUsername').value;
-    const role = document.getElementById('loginRoleSelect').value;
-    const department = document.getElementById('loginDepartmentSelect').value;
-    console.log(`Username: ${username}, Role: ${role}, Department: ${department}`);
-}
-
-// Sample code to populate roles and departments (replace with actual data)
-const roles_login = ['Admin', 'User', 'Guest'];
-const departments = ['HR', 'IT', 'Sales'];
-
-roles_login.forEach(role => {
-    const option = document.createElement('option');
-    option.value = role;
-    option.innerText = role;
-    roleSelect.appendChild(option);
-});
-
-departments.forEach(department => {
-    const option = document.createElement('option');
-    option.value = department;
-    option.innerText = department;
-    departmentSelect.appendChild(option);
-});
-
+// Define a variable to track registered users
+const registeredUsers = [];
+// After defining roles and departments
 const roles = [];
-const users = [];
 
-function addRole() {
-    const role = document.getElementById('newRole').value.trim();
-    const department = document.getElementById('newDepartment').value.trim();
-    const exists = roles.some(r => r.role === role && r.department === department);
+let db;
 
-    if (role && department && !exists) {
-        roles.push({ role, department });
-         roleList.style.display='block'
-        document.getElementById('newRole').value = '';
-        document.getElementById('newDepartment').value = '';
-        updateRoleAndDepartmentSelect();
-        displayRoles();
-    } else if (exists) {
-        alert('This role and department combination already exists');
-    } else {
-        alert('Please enter both role and department names');
-    }
-}
+const indexedDBRequest = window.indexedDB.open('YourDatabaseName', 1);
 
-function updateRoleAndDepartmentSelect() {
-    const roleSelect = document.getElementById('roleSelect');
-    const departmentSelect = document.getElementById('departmentSelect');
-    roleSelect.innerHTML = '';
-    departmentSelect.innerHTML = '';
+indexedDBRequest.onupgradeneeded = function(event) {
+    const db = event.target.result;
 
-    roles.forEach((item) => {
-        const roleOption = document.createElement('option');
-        roleOption.value = item.role;
-        roleOption.textContent = item.role;
-        roleSelect.appendChild(roleOption);
+    // Create object store for roles
+    const roleStore = db.createObjectStore('roles', { keyPath: 'id', autoIncrement: true });
+    roleStore.createIndex('role', 'role', { unique: false });
+    roleStore.createIndex('department', 'department', { unique: false });
 
-        const deptOption = document.createElement('option');
-        deptOption.value = item.department;
-        deptOption.textContent = item.department;
-        departmentSelect.appendChild(deptOption);
-    });
-}
+    // Create object store for users
+    const userStore = db.createObjectStore('users', { keyPath: 'id', autoIncrement: true });
+    userStore.createIndex('username', 'username', { unique: true });
+    userStore.createIndex('role', 'role', { unique: false });
+    userStore.createIndex('department', 'department', { unique: false });
+};
 
-function registerUser() {
-    const username = document.getElementById('username').value.trim();
-    const role = document.getElementById('roleSelect').value;
-    const department = document.getElementById('departmentSelect').value;
-    if (username && role && department) {
-        users.push({ username, role, department });
-        document.getElementById('username').value = '';
-        alert('User registered successfully');
-    } else {
-        alert('Please fill out all fields');
-    }
-}
+indexedDBRequest.onsuccess = function(event) {
+    db = event.target.result;
+};
 
-function loginUser() {
-    const loginUsername = document.getElementById('loginUsername').value.trim();
-    const loginRole = document.getElementById('loginRoleSelect').value;
-    const loginDepartment = document.getElementById('loginDepartmentSelect').value;
-    const user = users.find(u => u.username === loginUsername && u.role === loginRole && u.department === loginDepartment);
+indexedDBRequest.onerror = function(event) {
+    console.error('Error opening IndexedDB:', event.target.error);
+};
 
-    if (user) {
-        alert(`Welcome ${user.username} with role ${user.role} in department ${user.department}`);
-    } else {
-        alert('Invalid username, role, or department');
-    }
-}
-
-function displayRoles() {
-    const roleList = document.getElementById('roles');
-    roleList.style.display='hidden'
-    roleList.innerHTML = '';
-    roles.forEach((item, index) => {
-        const listItem = document.createElement('li');
-        listItem.className='flex flex-col gap-5 justify-satrt bg-blue-100 border-2 border-purple-300 p-2 rounded-xl'
-        listItem.textContent = `${item.role} - ${item.department}`;
-        listItem.appendChild(CreateTag("br"))
-        listItem.appendChild(createEditButton(index));
-        listItem.appendChild(createDeleteButton(index));
-        roleList.appendChild(listItem);
-    });
-}
-function CreateTag(tag="div", innerText=null, classList="", clickFun=null) {
-    const divElement = document.createElement(tag);
-    
-    if(innerText!= null)
-    {
-        divElement.textContent = innerText;
-        divElement.className = classList;
-    }
-    if(clickFun!=null)
-    {
-        divElement.onclick = () => clickFun;
-    }
-    return divElement;
-}
-function createEditButton(index) {
-    const editButton = document.createElement('button');
-    
-    editButton.textContent = 'Edit';
-    editButton.className = 'ml-2 bg-white text-blue-500 p-1 rounded-xl';
-    editButton.onclick = () => editRole(index);
-    return editButton;
-}
-
-function createDeleteButton(index) {
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
-    deleteButton.className = 'ml-2 bg-green-300 text-red-500 p-1 rounded-xl';
-    deleteButton.onclick = () => deleteRole(index);
-    return deleteButton;
-}
-
-function editRole(index) {
-    const role = prompt('Edit Role:', roles[index].role);
-    const department = prompt('Edit Department:', roles[index].department);
-    if (role && department) {
-        const exists = roles.some((r, i) => r.role === role && r.department === department && i !== index);
-        if (!exists) {
-            roles[index] = { role, department };
-            updateRoleAndDepartmentSelect();
-            displayRoles();
+// Function to create and append an element with given options
+function createElement(tag, options = {}) {
+    const element = document.createElement(tag);
+    for (const key in options) {
+        if (key === 'classList') {
+            element.classList.add(...options[key]);
+        } else if (key === 'text') {
+            element.textContent = options[key];
         } else {
-            alert('This role and department combination already exists');
+            element[key] = options[key];
         }
     }
+    return element;
 }
 
-function deleteRole(index) {
-    roles.splice(index, 1);
-    updateRoleAndDepartmentSelect();
-    displayRoles();
+// Function to create the main div element
+function createMainDiv() {
+    const mainDiv = createElement('div', {
+        classList: ['max-w-2xl', 'mx-auto']
+    });
+
+    // Create and append h1 element
+    const heading_main = createElement('h1', {
+        classList: ['text-2xl', 'font-bold', 'mb-4'],
+        text: 'Role and Department Management'
+    });
+    mainDiv.appendChild(heading_main);
+
+    return mainDiv;
 }
 
-function populateLoginOptions() {
+// Function to handle adding a role and department
+function addRoleAndDepartment() {
+    const newRoleInput = document.getElementById('newRole');
+    const newDepartmentInput = document.getElementById('newDepartment');
+
+    const newRole = newRoleInput.value.trim();
+    const newDepartment = newDepartmentInput.value.trim();
+
+    // Validate inputs
+    if (!newRole || !newDepartment) {
+        alert('Please enter both role and department.');
+        return;
+    }
+
+    // Check for duplicates
+    const existingRole = roles.find(role => role.role === newRole && role.department === newDepartment);
+    if (existingRole) {
+        alert(`Role "${newRole}" in Department "${newDepartment}" already exists.`);
+        return;
+    }
+
+    // Add role and department to roles array
+    roles.push({ role: newRole, department: newDepartment });
+    // Add role and department to IndexedDB
+    const transaction = db.transaction(['roles'], 'readwrite');
+    const roleStore = transaction.objectStore('roles');
+    roleStore.add({ role: newRole, department: newDepartment });
+
+    transaction.oncomplete = function() {
+        console.log('Role and department added to IndexedDB.');
+    };
+
+    transaction.onerror = function(event) {
+        console.error('Error adding role and department:', event.target.error);
+    };
+
+    // Update select options
+    populateSelectOptions();
+
+    // Clear inputs
+    newRoleInput.value = '';
+    newDepartmentInput.value = '';
+
+    // Show success message (popup message)
+    alert(`Role "${newRole}" in Department "${newDepartment}" added successfully.`);
+}
+
+// Function to create the add role form
+function createAddRoleForm() {
+    const form = createElement('form', {
+        id: 'addRoleForm',
+        classList: ['bg-white', 'p-4', 'shadow', 'rounded', 'mb-6']
+    });
+
+    // Create role input
+    const roleDIv1 = createElement('div', { classList: ['mb-4'] });
+    roleDIv1.appendChild(createElement('label', {
+        classList: ['block', 'text-gray-700'],
+        text: 'Role:'
+    }));
+    roleDIv1.appendChild(createElement('input', {
+        type: 'text',
+        id: 'newRole',
+        classList: ['mt-1', 'p-2', 'w-full', 'border', 'rounded'],
+        placeholder: 'Enter role'
+    }));
+    form.appendChild(roleDIv1);
+
+    // Create department input
+    const departmentDiv1 = createElement('div', { classList: ['mb-4'] });
+    departmentDiv1.appendChild(createElement('label', {
+        classList: ['block', 'text-gray-700'],
+        text: 'Department:'
+    }));
+    departmentDiv1.appendChild(createElement('input', {
+        type: 'text',
+        id: 'newDepartment',
+        classList: ['mt-1', 'p-2', 'w-full', 'border', 'rounded'],
+        placeholder: 'Enter department'
+    }));
+    form.appendChild(departmentDiv1);
+
+    // Create button
+    const button = createElement('button', {
+        type: 'button',
+        classList: ['bg-blue-500', 'text-white', 'px-4', 'py-2', 'rounded'],
+        text: 'Add Role and Department'
+    });
+    button.addEventListener('click', addRoleAndDepartment); // Attach click event handler
+    form.appendChild(button);
+
+    return form;
+}
+// Function to update the role and department list
+function updateRoleAndDepartmentList() {
+    const roleList = document.getElementById('roles');
+    roleList.innerHTML = ''; // Clear previous list
+
+    registeredUsers.forEach(user => {
+        const li = createElement('li', {
+            text: `Username: ${user.username}, Role: ${user.role}, Department: ${user.department}`,
+            classList: ['text-sm']
+        });
+        roleList.appendChild(li);
+    });
+
+    // Optionally, show an alert or console log
+    console.log('Role and department list updated.');
+}
+
+// Function to handle registering a user
+function registerUser() {
+    const usernameInput = document.getElementById('username');
+    const roleSelect = document.getElementById('roleSelect');
+    const departmentSelect = document.getElementById('departmentSelect');
+
+    const username = usernameInput.value.trim();
+    const role = roleSelect.value;
+    const department = departmentSelect.value;
+
+    // Validate inputs
+    if (!username || !role || !department) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // Check for duplicate username (optional)
+    const existingUser = registeredUsers.find(user => user.username === username);
+    if (existingUser) {
+        alert(`Username "${username}" is already registered.`);
+        return;
+    }
+
+    // Register the user
+    registeredUsers.push({ username, role, department });
+
+    // Update the display
+    updateRoleAndDepartmentList();
+
+    // Clear inputs
+    usernameInput.value = '';
+    roleSelect.selectedIndex = 0;
+    departmentSelect.selectedIndex = 0;
+    // Register the user and add to IndexedDB
+    const transaction = db.transaction(['users'], 'readwrite');
+    const userStore = transaction.objectStore('users');
+    userStore.add({ username, role, department });
+
+    transaction.oncomplete = function() {
+        console.log('User registered and added to IndexedDB.');
+    };
+
+    transaction.onerror = function(event) {
+        console.error('Error registering user:', event.target.error);
+    };
+
+
+    // Show success message
+    alert(`User "${username}" registered successfully with Role "${role}" in Department "${department}".`);
+}
+// Function to create the register user form
+function createRegisterUserForm() {
+    const form = createElement('form', {
+        id: 'registerUserForm',
+        classList: ['bg-white', 'p-4', 'shadow', 'rounded', 'mb-6']
+    });
+
+    // Create username input
+    form.appendChild(createElement('div', { classList: ['mb-4'] }));
+    form.querySelector('div').appendChild(createElement('label', {
+        classList: ['block', 'text-gray-700'],
+        text: 'Username:'
+    }));
+    form.querySelector('div').appendChild(createElement('input', {
+        type: 'text',
+        id: 'username',
+        classList: ['mt-1', 'p-2', 'w-full', 'border', 'rounded'],
+        placeholder: 'Enter username'
+    }));
+
+    // Create role select
+    const roleDiv = createElement('div', { classList: ['mb-4'] });
+    roleDiv.appendChild(createElement('label', {
+        classList: ['block', 'text-gray-700'],
+        text: 'Select Role:'
+    }));
+    const roleSelect = createElement('select', {
+        id: 'roleSelect',
+        classList: ['mt-1', 'p-2', 'w-full', 'border', 'rounded']
+    });
+    roleDiv.appendChild(roleSelect);
+    form.appendChild(roleDiv);
+
+    // Create department select
+    const departmentDiv = createElement('div', { classList: ['mb-4'] });
+    departmentDiv.appendChild(createElement('label', {
+        classList: ['block', 'text-gray-700'],
+        text: 'Select Department:'
+    }));
+    const departmentSelect = createElement('select', {
+        id: 'departmentSelect',
+        classList: ['mt-1', 'p-2', 'w-full', 'border', 'rounded']
+    });
+    departmentDiv.appendChild(departmentSelect);
+    form.appendChild(departmentDiv);
+
+    // Create register button
+    const button = createElement('button', {
+        type: 'button',
+        classList: ['bg-green-500', 'text-white', 'px-4', 'py-2', 'rounded'],
+        text: 'Register'
+    });
+    button.onclick = registerUser;
+    form.appendChild(button);
+
+    return form;
+}
+
+// Function to create the login form
+function createLoginForm() {
+    const form = createElement('form', {
+        id: 'loginForm',
+        classList: ['bg-white', 'p-4', 'shadow', 'rounded', 'mb-6']
+    });
+
+    // Create username input
+    form.appendChild(createElement('div', { classList: ['mb-4'] }));
+    form.querySelector('div').appendChild(createElement('label', {
+        classList: ['block', 'text-gray-700'],
+        text: 'Username:'
+    }));
+    form.querySelector('div').appendChild(createElement('input', {
+        type: 'text',
+        id: 'loginUsername',
+        classList: ['mt-1', 'p-2', 'w-full', 'border', 'rounded'],
+        placeholder: 'Enter username'
+    }));
+
+    // Create role select
+    const roleDiv = createElement('div', { classList: ['mb-4'] });
+    roleDiv.appendChild(createElement('label', {
+        classList: ['block', 'text-gray-700'],
+        text: 'Select Role:'
+    }));
+    const loginRoleSelect = createElement('select', {
+        id: 'loginRoleSelect',
+        classList: ['mt-1', 'p-2', 'w-full', 'border', 'rounded']
+    });
+    roleDiv.appendChild(loginRoleSelect);
+    form.appendChild(roleDiv);
+
+    // Create department select
+    const departmentDiv = createElement('div', { classList: ['mb-4'] });
+    departmentDiv.appendChild(createElement('label', {
+        classList: ['block', 'text-gray-700'],
+        text: 'Select Department:'
+    }));
+    const loginDepartmentSelect = createElement('select', {
+        id: 'loginDepartmentSelect',
+        classList: ['mt-1', 'p-2', 'w-full', 'border', 'rounded']
+    });
+    departmentDiv.appendChild(loginDepartmentSelect);
+    form.appendChild(departmentDiv);
+
+    // Create login button
+    const button = createElement('button', {
+        type: 'button',
+        classList: ['bg-purple-500', 'text-white', 'px-4', 'py-2', 'rounded'],
+        text: 'Login'
+    });
+    button.addEventListener('click', loginUser); // Attach click event handler
+    form.appendChild(button);
+
+    return form;
+}
+
+// Function to create the role and department list
+function createRoleAndDepartmentList() {
+    const roleListDiv = createElement('div', {
+        id: 'roleList',
+        classList: ['bg-white', 'p-4', 'shadow', 'rounded']
+    });
+
+    // Create h2 element
+    roleListDiv.appendChild(createElement('h2', {
+        classList: ['text-xl', 'font-bold', 'mb-2'],
+        text: 'Available Roles and Departments'
+    }));
+
+    // Create ul element
+    const ul = createElement('ul', {
+        id: 'roles',
+        classList: ['list-disc', 'pl-5', 'bg-blue-200', 'w-36', 'flex', 'flex-col', 'gap-3', 'p-4', 'rounded-xl', 'border-2', 'border-purple-600']
+    });
+    roleListDiv.appendChild(ul);
+
+    return roleListDiv;
+}
+
+// Function to simulate login process
+function loginUser() {
+    const username = document.getElementById('loginUsername').value.trim();
+    const role = document.getElementById('loginRoleSelect').value;
+    const department = document.getElementById('loginDepartmentSelect').value;
+
+    // Validate inputs
+    if (!username || !role || !department) {
+        alert('Please fill in all fields.');
+        return;
+    }
+
+    // Simulate a basic login check (replace with actual authentication logic)
+    // For demonstration, we'll just show an alert with the login details.
+    alert(`Login successful!\nUsername: ${username}\nRole: ${role}\nDepartment: ${department}`);
+
+    // Clear inputs (optional)
+    document.getElementById('loginUsername').value = '';
+    document.getElementById('loginRoleSelect').selectedIndex = 0; // Reset role select to default
+    document.getElementById('loginDepartmentSelect').selectedIndex = 0; // Reset department select to default
+}
+
+// Function to populate role and department select options
+function populateSelectOptions() {
+    const roleSelect = document.getElementById('roleSelect');
+    const departmentSelect = document.getElementById('departmentSelect');
     const loginRoleSelect = document.getElementById('loginRoleSelect');
     const loginDepartmentSelect = document.getElementById('loginDepartmentSelect');
-    loginRoleSelect.innerHTML = '';
-    loginDepartmentSelect.innerHTML = '';
-    const loginUsername = document.getElementById('loginUsername').value.trim();
-    const userRoles = users.filter(u => u.username === loginUsername);
 
-    userRoles.forEach((user) => {
-        const roleOption = document.createElement('option');
-        roleOption.value = user.role;
-        roleOption.textContent = user.role;
-        loginRoleSelect.appendChild(roleOption);
+    // // Clear existing options
+    // roleSelect.innerHTML = '';
+    // departmentSelect.innerHTML = '';
+    // loginRoleSelect.innerHTML = '';
+    // loginDepartmentSelect.innerHTML = '';
 
-        const deptOption = document.createElement('option');
-        deptOption.value = user.department;
-        deptOption.textContent = user.department;
-        loginDepartmentSelect.appendChild(deptOption);
+    // Populate role options
+    roles.forEach(role => {
+        const option = document.createElement('option');
+        option.text = `${role.role} (${role.department})`;
+        option.value = role.role; // You can set the value to the role name or ID
+        roleSelect.add(option.cloneNode(true));
+
+        const loginOption = document.createElement('option');
+        loginOption.text = `${role.role} (${role.department})`;
+        loginOption.value = role.role; // You can set the value to the role name or ID
+        loginRoleSelect.add(loginOption.cloneNode(true));
+    });
+
+    // Populate department options
+    const departments = [...new Set(roles.map(role => role.department))]; // Get unique departments
+    departments.forEach(department => {
+        const option = document.createElement('option');
+        option.text = department;
+        option.value = department; // You can set the value to the department name or ID
+        departmentSelect.add(option.cloneNode(true));
+
+        const loginOption = document.createElement('option');
+        loginOption.text = department;
+        loginOption.value = department; // You can set the value to the department name or ID
+        loginDepartmentSelect.add(loginOption.cloneNode(true));
     });
 }
 
-document.getElementById('loginUsername').addEventListener('input', populateLoginOptions);
+// Function to initialize the app
+export function initializeapp() {
+    const mainDiv = createMainDiv();
+    const addRoleForm = createAddRoleForm();
+    const registerUserForm = createRegisterUserForm();
+    const loginForm = createLoginForm(); // Adjusted to include event handling for login
+    const roleListDiv = createRoleAndDepartmentList();
 
-// <!-- Role and Department List -->
+    const bodyDiv=document.createElement('div')
+    // Append elements to body (or container element)
+    bodyDiv.appendChild(mainDiv);
+    bodyDiv.appendChild(addRoleForm);
+    bodyDiv.appendChild(registerUserForm);
+    bodyDiv.appendChild(loginForm);
+    bodyDiv.appendChild(roleListDiv);
 
-// Create the main div element
-const roleListDiv = document.createElement('div');
-roleListDiv.id = 'roleList';
-roleListDiv.classList.add('bg-white', 'p-4', 'shadow', 'rounded');
+    // Populate roles with data
+    populateSelectOptions();
+    return bodyDiv
+}
 
-// Create and append h2 element
-const heading = document.createElement('h2');
-heading.classList.add('text-xl', 'font-bold', 'mb-2');
-heading.innerText = 'Available Roles and Departments';
-roleListDiv.appendChild(heading);
-
-// Create and append ul element
-const ul = document.createElement('ul');
-ul.id = 'roles';
-ul.classList.add('list-disc', 'pl-5', 'bg-blue-200', 'w-36', 'flex', 'flex-col', 'gap-3', 'p-4', 'rounded-xl', 'border-2', 'border-purple-600');
-roleListDiv.appendChild(ul);
-
-// Append the main div to the body (or another container element)
-document.body.appendChild(roleListDiv);
-
-// Sample code to populate roles and departments (replace with actual data)
-const rolesAndDepartments = [
-    'Admin - IT',
-    'User - Sales',
-    'Guest - HR'
-];
-
-rolesAndDepartments.forEach(item => {
-    const li = document.createElement('li');
-    li.innerText = item;
-    ul.appendChild(li);
-});
+// Call initializeApp to start the application
+initializeapp();
