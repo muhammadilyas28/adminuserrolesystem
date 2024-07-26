@@ -1,7 +1,6 @@
 // Define a variable to track registered users
-const registeredUsers = [];
-// After defining roles and departments
-const roles = [];
+let registeredUsers = [];
+let roles = [];
 
 let db;
 
@@ -17,14 +16,14 @@ indexedDBRequest.onupgradeneeded = function(event) {
 
     // Create object store for users
     const userStore = db.createObjectStore('users', { keyPath: 'id', autoIncrement: true });
-    userStore.createIndex('username', 'username', { unique: false });
+    userStore.createIndex('username', 'username', { unique: true });
     userStore.createIndex('role', 'role', { unique: false });
     userStore.createIndex('department', 'department', { unique: false });
-    userStore.createIndex('uniqueCombination', ['username', 'role', 'department'], { unique: true });
 };
 
 indexedDBRequest.onsuccess = function(event) {
     db = event.target.result;
+    initializeApp(); // Initialize the app after successfully opening the DB
 };
 
 indexedDBRequest.onerror = function(event) {
@@ -92,14 +91,12 @@ function addRoleAndDepartment() {
 
     transaction.oncomplete = function() {
         console.log('Role and department added to IndexedDB.');
+        populateSelectOptions(); // Update select options after transaction completion
     };
 
     transaction.onerror = function(event) {
         console.error('Error adding role and department:', event.target.error);
     };
-
-    // Update select options
-    populateSelectOptions();
 
     // Clear inputs
     newRoleInput.value = '';
@@ -155,6 +152,7 @@ function createAddRoleForm() {
 
     return form;
 }
+
 // Function to update the role and department list
 function updateRoleAndDepartmentList() {
     const roleList = document.getElementById('roles');
@@ -188,36 +186,34 @@ function registerUser() {
         return;
     }
 
-    // Check for duplicate username, role, and department combination
+    // Check for duplicate username (optional)
     const existingUser = registeredUsers.find(user => user.username === username && user.role === role && user.department === department);
     if (existingUser) {
-        alert(`Username "${username}" with Role "${role}" in Department "${department}" is already registered.`);
+        alert(`User "${username}" with Role "${role}" in Department "${department}" is already registered.`);
         return;
     }
 
     // Register the user
     registeredUsers.push({ username, role, department });
 
-    // Update the display
-    updateRoleAndDepartmentList();
-
-    // Clear inputs
-    usernameInput.value = '';
-    roleSelect.selectedIndex = 0;
-    departmentSelect.selectedIndex = 0;
-
     // Register the user and add to IndexedDB
     const transaction = db.transaction(['users'], 'readwrite');
     const userStore = transaction.objectStore('users');
-    userStore.add({ username, role, department, uniqueCombination: `${username}-${role}-${department}` });
+    userStore.add({ username, role, department });
 
     transaction.oncomplete = function() {
         console.log('User registered and added to IndexedDB.');
+        updateRoleAndDepartmentList(); // Update the display after transaction completion
     };
 
     transaction.onerror = function(event) {
         console.error('Error registering user:', event.target.error);
     };
+
+    // Clear inputs
+    usernameInput.value = '';
+    roleSelect.selectedIndex = 0;
+    departmentSelect.selectedIndex = 0;
 
     // Show success message
     alert(`User "${username}" registered successfully with Role "${role}" in Department "${department}".`);
@@ -231,17 +227,18 @@ function createRegisterUserForm() {
     });
 
     // Create username input
-    form.appendChild(createElement('div', { classList: ['mb-4'] }));
-    form.querySelector('div').appendChild(createElement('label', {
+    const usernameDiv = createElement('div', { classList: ['mb-4'] });
+    usernameDiv.appendChild(createElement('label', {
         classList: ['block', 'text-gray-700'],
         text: 'Username:'
     }));
-    form.querySelector('div').appendChild(createElement('input', {
+    usernameDiv.appendChild(createElement('input', {
         type: 'text',
         id: 'username',
         classList: ['mt-1', 'p-2', 'w-full', 'border', 'rounded'],
         placeholder: 'Enter username'
     }));
+    form.appendChild(usernameDiv);
 
     // Create role select
     const roleDiv = createElement('div', { classList: ['mb-4'] });
@@ -281,16 +278,14 @@ function createRegisterUserForm() {
     return form;
 }
 
-// Function to populate select options
+// Function to populate select options for roles and departments
 function populateSelectOptions() {
     const roleSelect = document.getElementById('roleSelect');
     const departmentSelect = document.getElementById('departmentSelect');
 
-    // Clear existing options
-    roleSelect.innerHTML = '';
-    departmentSelect.innerHTML = '';
+    roleSelect.innerHTML = ''; // Clear previous options
+    departmentSelect.innerHTML = ''; // Clear previous options
 
-    // Populate role options
     roles.forEach(role => {
         const option = createElement('option', {
             value: role.role,
@@ -299,51 +294,55 @@ function populateSelectOptions() {
         roleSelect.appendChild(option);
     });
 
-    // Populate department options
-    roles.forEach(role => {
+    const departments = [...new Set(roles.map(role => role.department))]; // Get unique departments
+    departments.forEach(department => {
         const option = createElement('option', {
-            value: role.department,
-            text: role.department
+            value: department,
+            text: department
         });
         departmentSelect.appendChild(option);
     });
 }
 
-// Function to initialize the page
-function initializePage() {
-    const mainDiv = createMainDiv();
-    document.body.appendChild(mainDiv);
-
-    // Append add role form
-    mainDiv.appendChild(createAddRoleForm());
-
-    // Create and append the registered users display list
-    const registeredUsersDiv = createElement('div', { classList: ['bg-white', 'p-4', 'shadow', 'rounded', 'mb-6'] });
-    registeredUsersDiv.appendChild(createElement('h2', {
-        classList: ['text-xl', 'font-bold', 'mb-4'],
-        text: 'Registered Users'
-    }));
-    registeredUsersDiv.appendChild(createElement('ul', { id: 'roles', classList: ['list-disc', 'list-inside'] }));
-    mainDiv.appendChild(registeredUsersDiv);
-
-    // Append register user form
-    mainDiv.appendChild(createRegisterUserForm());
-
-    // Fetch existing roles from IndexedDB and populate options
-    const transaction = db.transaction(['roles'], 'readonly');
+// Function to initialize the application
+function initializeApp() {
+    // Load roles and users from IndexedDB
+    const transaction = db.transaction(['roles', 'users'], 'readonly');
     const roleStore = transaction.objectStore('roles');
-    const request = roleStore.getAll();
+    const userStore = transaction.objectStore('users');
 
-    request.onsuccess = function(event) {
-        const rolesFromDB = event.target.result;
-        roles.push(...rolesFromDB);
-        populateSelectOptions();
+    roleStore.getAll().onsuccess = function(event) {
+        roles = event.target.result || [];
+        populateSelectOptions(); // Populate select options after loading roles
     };
 
-    request.onerror = function(event) {
-        console.error('Error fetching roles from IndexedDB:', event.target.error);
+    userStore.getAll().onsuccess = function(event) {
+        registeredUsers = event.target.result || [];
+        updateRoleAndDepartmentList(); // Update role and department list after loading users
     };
 }
 
-// Initialize the page when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', initializePage);
+// Main function to initialize the app
+function main() {
+    const mainDiv = createMainDiv();
+    document.body.appendChild(mainDiv);
+
+    const addRoleForm = createAddRoleForm();
+    mainDiv.appendChild(addRoleForm);
+
+    const registerUserForm = createRegisterUserForm();
+    mainDiv.appendChild(registerUserForm);
+
+    const roleListContainer = createElement('div', {
+        classList: ['bg-white', 'p-4', 'shadow', 'rounded', 'mb-6']
+    });
+    roleListContainer.appendChild(createElement('h2', {
+        classList: ['text-xl', 'font-bold', 'mb-4'],
+        text: 'Registered Users'
+    }));
+    const roleList = createElement('ul', { id: 'roles' });
+    roleListContainer.appendChild(roleList);
+    mainDiv.appendChild(roleListContainer);
+}
+
+main(); // Call the main function
