@@ -1,11 +1,10 @@
-// Define a variable to track registered users
-let registeredUsers = [];
-let roles = [];
+// Activity Log
 
-let db;
-
+// 1. Initialization and Setup
+// Open IndexedDB database named 'YourDatabaseName' with version 1
 const indexedDBRequest = window.indexedDB.open('YourDatabaseName', 1);
 
+// Event handler for database version upgrade or creation
 indexedDBRequest.onupgradeneeded = function(event) {
     const db = event.target.result;
 
@@ -21,15 +20,18 @@ indexedDBRequest.onupgradeneeded = function(event) {
     userStore.createIndex('department', 'department', { unique: false });
 };
 
+// Success handler for opening IndexedDB
 indexedDBRequest.onsuccess = function(event) {
     db = event.target.result;
     initializeApp(); // Initialize the app after successfully opening the DB
 };
 
+// Error handler for opening IndexedDB
 indexedDBRequest.onerror = function(event) {
     console.error('Error opening IndexedDB:', event.target.error);
 };
 
+// 2. UI Elements Creation
 // Function to create and append an element with given options
 function createElement(tag, options = {}) {
     const element = document.createElement(tag);
@@ -61,6 +63,7 @@ function createMainDiv() {
     return mainDiv;
 }
 
+// 3. Role and Department Management
 // Function to handle adding a role and department
 function addRoleAndDepartment() {
     const newRoleInput = document.getElementById('newRole');
@@ -102,7 +105,7 @@ function addRoleAndDepartment() {
     newRoleInput.value = '';
     newDepartmentInput.value = '';
 
-    // Show success message (popup message)
+    // Show success message
     alert(`Role "${newRole}" in Department "${newDepartment}" added successfully.`);
 }
 
@@ -166,10 +169,10 @@ function updateRoleAndDepartmentList() {
         roleList.appendChild(li);
     });
 
-    // Optionally, show an alert or console log
     console.log('Role and department list updated.');
 }
 
+// 4. User Registration
 // Function to handle registering a user
 function registerUser() {
     const usernameInput = document.getElementById('username');
@@ -278,6 +281,7 @@ function createRegisterUserForm() {
     return form;
 }
 
+// 5. Data Population and UI Updates
 // Function to populate select options for roles and departments
 function populateSelectOptions() {
     const roleSelect = document.getElementById('roleSelect');
